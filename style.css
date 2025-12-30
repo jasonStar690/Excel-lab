@@ -1,0 +1,326 @@
+/* Basic Setup */
+:root {
+    --primary-color: #6366f1;
+    /* Indigo 500 */
+    --primary-light: #818cf8;
+    --bg-gradient-start: #f0f9ff;
+    --bg-gradient-end: #e0e7ff;
+    --glass-bg: rgba(255, 255, 255, 0.85);
+    --glass-border: rgba(255, 255, 255, 0.6);
+    --text-main: #1e293b;
+    /* Slate 800 */
+    --text-muted: #64748b;
+    /* Slate 500 */
+    --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    --hover-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+    --animation-speed: 0.3s;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    /* Prevent body scroll, handle in app */
+}
+
+/* Background Decoration */
+.background-blobs {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.blob {
+    position: absolute;
+    filter: blur(100px);
+    opacity: 0.5;
+    animation: drift 20s infinite alternate;
+}
+
+.blob-1 {
+    top: -10%;
+    left: -10%;
+    width: 50vw;
+    height: 50vw;
+    background: #c7d2fe;
+}
+
+.blob-2 {
+    bottom: -10%;
+    right: -10%;
+    width: 50vw;
+    height: 50vw;
+    background: #fbcfe8;
+    animation-delay: -10s;
+}
+
+@keyframes drift {
+    from {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    to {
+        transform: translate(50px, 30px) rotate(5deg);
+    }
+}
+
+/* App Container */
+.app-container {
+    width: 95%;
+    /* Wider for spreadsheets */
+    max-width: 1400px;
+    height: 90vh;
+    background: var(--glass-bg);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--glass-border);
+    border-radius: 32px;
+    box-shadow: var(--hover-shadow);
+    display: flex;
+    flex-direction: column;
+    padding: 2.5rem;
+    transition: all var(--animation-speed) ease;
+    animation: scaleIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Header */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.logo h1 {
+    font-size: 1.75rem;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    background: linear-gradient(to right, #4f46e5, #9333ea);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.app-description {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+
+/* Upload Zone - Premium Card */
+.upload-zone {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px dashed #cbd5e1;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.5);
+    transition: all var(--animation-speed) cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    margin: 1rem 0;
+}
+
+.upload-zone:hover,
+.upload-zone.dragover {
+    border-color: var(--primary-color);
+    background: rgba(255, 255, 255, 0.8);
+    transform: translateY(-4px);
+    box-shadow: var(--hover-shadow);
+}
+
+.upload-content {
+    text-align: center;
+}
+
+.upload-icon {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.8;
+}
+
+/* Editor Zone */
+.editor-zone {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.editor-zone.hidden {
+    display: none;
+}
+
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.file-pill {
+    background: white;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-main);
+    box-shadow: var(--card-shadow);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 16px;
+    border: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: white;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.btn-primary:hover {
+    background: var(--primary-light);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--text-muted);
+}
+
+.btn-secondary:hover {
+    color: var(--text-main);
+    background: rgba(0, 0, 0, 0.03);
+}
+
+/* Magic Grid Table */
+.table-wrapper {
+    flex: 1;
+    overflow: auto;
+    border-radius: 20px;
+    background: white;
+    box-shadow: var(--card-shadow);
+    padding-bottom: 2rem;
+    /* Space for last row shadow */
+}
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    /* Required for border-radius on rows */
+    border-spacing: 0 0.5rem;
+    /* Gap between rows */
+    padding: 0 1rem;
+}
+
+thead {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: white;
+    /* Hide scrolling content */
+}
+
+th {
+    text-align: left;
+    padding: 1rem 1.5rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    border-bottom: 2px solid #f1f5f9;
+}
+
+tbody tr {
+    background: white;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.03);
+    /* Subtle border */
+    border-radius: 12px;
+}
+
+/* Row Hover Interaction - The "Breathing" Effect */
+tbody tr:hover {
+    transform: scale(1.005) translateZ(0);
+    /* Hardware accel */
+    box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.08);
+    /* Lift up */
+    z-index: 1;
+    position: relative;
+    background: #fafafa;
+}
+
+td {
+    padding: 1.25rem 1.5rem;
+    font-variant-numeric: tabular-nums;
+    /* Align numbers */
+    color: var(--text-main);
+}
+
+td:first-child {
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+    font-weight: 600;
+    /* Highlight first column */
+    color: var(--primary-color);
+}
+
+td:last-child {
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+/* Editable Focus */
+td[contenteditable="true"]:focus {
+    outline: none;
+    background: #eef2ff;
+    color: var(--primary-color);
+    box-shadow: inset 0 0 0 2px var(--primary-color);
+    border-radius: 8px;
+    /* Inner radius for focus ring */
+}
+
+/* Scrollbar */
+.table-wrapper::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 5px;
+    border: 2px solid white;
+}

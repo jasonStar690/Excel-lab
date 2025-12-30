@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel Lab - 在线 Excel 编辑工具</title>
+    <!-- Use Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="style.css">
+    <!-- SheetJS Library -->
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
+</head>
+
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <main class="app-container">
+        <header class="app-header">
+            <div class="logo">
+                <span class="logo-icon">📊</span>
+                <h1>Excel Lab</h1>
+            </div>
+            <p class="app-description">简单、优雅的在线 Excel 查看与编辑工具</p>
+        </header>
+
+        <section id="upload-zone" class="upload-zone">
+            <div class="upload-content">
+                <div class="upload-icon">📁</div>
+                <h3>点击或拖拽上传文件</h3>
+                <p>支持 .xlsx, .xls 格式</p>
+                <input type="file" id="file-input" accept=".xlsx, .xls" hidden>
+            </div>
+        </section>
+
+        <section id="editor-zone" class="editor-zone hidden">
+            <div class="toolbar">
+                <div class="file-pill">
+                    <span style="font-size: 1.2em;">📄</span>
+                    <span id="current-filename">filename.xlsx</span>
+                </div>
+                <div class="actions">
+                    <button id="close-btn" class="btn btn-secondary">关闭</button>
+                    <button id="export-btn" class="btn btn-primary">导出 Excel</button>
+                </div>
+            </div>
+
+            <div class="table-wrapper">
+                <table id="data-table">
+                    <!-- Data will be injected here -->
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
